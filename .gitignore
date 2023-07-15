@@ -1,0 +1,11 @@
+__pycache__/
+pytypes/
+.woke-build/
+.woke-logs/
+node_modules/
+venv/
+.vscode
+
+# testing
+.pytest_cache
+.hypothesis
