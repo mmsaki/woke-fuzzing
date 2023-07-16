@@ -4,24 +4,27 @@ from pytypes.contracts.Counter import Counter
 
 
 class CounterTest(FuzzTest):
+    counter: Counter
+    count = int
+
     def pre_sequence(self) -> None:
         self.counter = Counter.deploy()
         self.count = 0
 
-    @flow()
+    @flow(weight=50)
     def increment(self) -> None:
         self.counter.increment()
         self.count += 1
 
-    @flow()
+    @flow(weight=100)
     def decrement(self) -> None:
         with may_revert(Panic(PanicCodeEnum.UNDERFLOW_OVERFLOW)) as e:
             self.counter.decrement()
 
-        if e.value is not None:
-            assert self.count == 0
-        else:
+        if e.value is None:
             self.count -= 1
+        else:
+            assert self.count == 0
 
     @invariant(period=10)
     def count(self) -> None:
