@@ -15,7 +15,7 @@
 	"author": "meek msaki",
 	"license": "MIT",
 	"dependencies": {
-		"@openzeppelin/contracts": "^4.9.0",
+		"@openzeppelin/contracts": "^4.9.2",
 		"@uniswap/v3-core": "^1.0.1"
 	}
 }
